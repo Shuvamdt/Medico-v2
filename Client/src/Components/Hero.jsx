@@ -13,7 +13,7 @@ const Hero = () => {
   const sizes = calculateSizes(isSmall, isMobile, isTablet);
   return (
     <section className="min-h-screen w-full flex flex-col relative" id="home">
-      <div className="w-full mx-auto flex flex-col sm:mt-36 mt-20 c-space gap-3 relative z-10">
+      <div className="w-full mx-auto flex flex-col sm:mt-36 md:mt-20 mt-10 c-space gap-3 relative z-10">
         <p className="sm:text-[50px] text-3xl font-medium text-center font-generalsans">
           We<span className="homemade-apple-regular text-[#93B1A6]"> Care</span>
           , We{"  "}
@@ -38,7 +38,7 @@ const Hero = () => {
       </div>
       <div className="w-full mx-auto flex flex-col sm:mt-50 mt-20 c-space gap-3 relative z-10">
         <p className="text-center text-gray_gradient">
-          This is a medical store management system where you can buy, sell and
+          This is a medical store management system where you can buy and
           <br />
           find accurate medicines according to your problems.
         </p>
