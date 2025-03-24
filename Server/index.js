@@ -12,7 +12,7 @@ import dotenv from "dotenv";
 import { GoogleGenerativeAI } from "@google/generative-ai";
 import pkg from "pg";
 
-// const { Pool } = pkg;
+const { Pool } = pkg;
 const app = express();
 const port = process.env.PORT || 4000;
 const saltRounds = 10;
@@ -41,21 +41,21 @@ app.use(
   })
 );
 
-// const db = new Pool({
-//   connectionString: process.env.DATABASE_URL,
-//   ssl: {
-//     rejectUnauthorized: false,
-//   },
-// });
-
-const db = new pg.Client({
-  user: process.env.PG_USER,
-  host: process.env.PG_HOST,
-  database: process.env.PG_DATABASE,
-  password: process.env.PG_PASSWORD,
-  port: process.env.PG_PORT,
+const db = new Pool({
+  connectionString: process.env.DATABASE_URL,
+  ssl: {
+    rejectUnauthorized: false,
+  },
 });
-db.connect();
+
+// const db = new pg.Client({
+//   user: process.env.PG_USER,
+//   host: process.env.PG_HOST,
+//   database: process.env.PG_DATABASE,
+//   password: process.env.PG_PASSWORD,
+//   port: process.env.PG_PORT,
+// });
+// db.connect();
 
 const genAI = new GoogleGenerativeAI(process.env.GEMINI_API_KEY);
 const model = genAI.getGenerativeModel({ model: "gemini-1.5-flash" });
