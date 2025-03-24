@@ -3,7 +3,6 @@ import bodyParser from "body-parser";
 import axios from "axios";
 import pg from "pg";
 import cors from "cors";
-import bcrypt from "bcrypt";
 import session from "express-session";
 import passport from "passport";
 import { Strategy } from "passport-local";
