@@ -34,7 +34,7 @@ app.use(
       "http://localhost:5173",
       "http://localhost:4000",
       "https://medico-v2.vercel.app",
-      "https://writography-v-2-nmc8.vercel.app",
+      "https://medico-v2-idl5.vercel.app/",
     ],
     credentials: true,
   })
