@@ -5,7 +5,7 @@ import { mirage } from "ldrs";
 mirage.register();
 
 //const API_URL = "http://localhost:4000";
-const API_URL = "https://medico-v2-idl5.vercel.app/";
+const API_URL = "https://medico-v2-idl5.vercel.app";
 const Store = () => {
   const [medicines, setMedicines] = useState([]);
   const [loading, setLoading] = useState(true);
