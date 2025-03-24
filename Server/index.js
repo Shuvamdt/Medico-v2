@@ -34,7 +34,7 @@ app.use(
     origin: [
       "http://localhost:5173",
       "http://localhost:4000",
-      "https://writography-frontend.vercel.app",
+      "https://medico-v2.vercel.app",
       "https://writography-v-2-nmc8.vercel.app",
     ],
     credentials: true,
