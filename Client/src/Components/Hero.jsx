@@ -5,9 +5,7 @@ import { useMediaQuery } from "react-responsive";
 import Capsule from "../Models/Capsule";
 import { calculateSizes } from "../Constants/index";
 import HeroCamera from "./HeroCamera";
-import { mirage } from "ldrs";
 
-mirage.register();
 const Hero = () => {
   const isSmall = useMediaQuery({ maxWidth: 440 });
   const isMobile = useMediaQuery({ maxWidth: 640 });
@@ -24,11 +22,7 @@ const Hero = () => {
       </div>
       <div className="w-full h-full mt-auto absolute inset-0 z-0">
         <Canvas className="w-full h-full">
-          <Suspense
-            fallback={
-              <l-mirage size="100" speed="2.5" color="#93B1A6"></l-mirage>
-            }
-          >
+          <Suspense fallback={null}>
             <PerspectiveCamera makeDefault position={[0, 0, 20]} />
             <HeroCamera isMobile={isMobile}>
               <Capsule
