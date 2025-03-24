@@ -13,7 +13,7 @@ const Hero = () => {
   const sizes = calculateSizes(isSmall, isMobile, isTablet);
   return (
     <section className="min-h-screen w-full flex flex-col relative" id="home">
-      <div className="w-full mx-auto flex flex-col sm:mt-36 md:mt-20 mt-10 c-space gap-3 relative z-10">
+      <div className="w-full mx-auto flex flex-col sm:mt-36 mt-20 c-space gap-3 relative z-10">
         <p className="sm:text-[50px] text-3xl font-medium text-center font-generalsans">
           We<span className="homemade-apple-regular text-[#93B1A6]"> Care</span>
           , We{"  "}
@@ -21,7 +21,7 @@ const Hero = () => {
         </p>
       </div>
       <div className="w-full h-full mt-auto absolute inset-0 z-0">
-        <Canvas className="w-full h-full">
+        <Canvas className="w-full h-fit">
           <Suspense fallback={null}>
             <PerspectiveCamera makeDefault position={[0, 0, 20]} />
             <HeroCamera isMobile={isMobile}>
