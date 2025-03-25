@@ -4,6 +4,7 @@ import menu from "/assets/menu-button.png";
 import close from "/assets/close.png";
 import user from "/assets/user.png";
 import bag from "/assets/shopping-bag.png";
+import { Link } from "react-router-dom";
 
 const Navbar = (props) => {
   const bagItems = localStorage.getItem("orders");
@@ -54,13 +55,17 @@ const Navbar = (props) => {
             {avatarMenuOpen && (
               <div className="absolute top-10 right-0 h-fit w-fit p-5 rounded-lg backdrop-blur-lg bg-[#93B1A6]">
                 <div className="flex flex-col flex-grow justify-center items-center p-2">
-                  {props.signedIN ? (
+                  {!props.signedIN ? (
                     <div className="flex flex-col mx-auto right-0 top-0 z-20 space-x-12 gap-4">
                       <button className="rounded-full text-center bg-[#183D3D] mx-4 px-4 py-1 hover:bg-[#040D12]">
-                        <a href="/register">Sign In</a>
+                        <Link to="/register" state={{ user: true }}>
+                          Sign In
+                        </Link>
                       </button>
                       <button className="rounded-full text-center bg-[#183D3D] mx-4 px-4 py-1 hover:bg-[#040D12]">
-                        <a href="/register">Sign Up</a>
+                        <Link to="/register" state={{ user: false }}>
+                          Sign Up
+                        </Link>
                       </button>
                     </div>
                   ) : (
