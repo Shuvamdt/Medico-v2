@@ -110,6 +110,12 @@ const Register = (props) => {
                 e.preventDefault();
                 handleLogin();
               }}
+              onKeyDown={(e) => {
+                if (e.key === "Enter") {
+                  e.preventDefault();
+                  handleLogin();
+                }
+              }}
             >
               <label htmlFor="Email" className="text-sm px-1 py-1 my-2">
                 Email
@@ -171,6 +177,12 @@ const Register = (props) => {
               onSubmit={(e) => {
                 e.preventDefault();
                 handleSignUp();
+              }}
+              onKeyDown={(e) => {
+                if (e.key === "Enter") {
+                  e.preventDefault();
+                  handleLogin();
+                }
               }}
             >
               <label htmlFor="Name" className="text-sm px-1 py-1 my-2">

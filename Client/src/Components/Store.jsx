@@ -25,11 +25,12 @@ const Store = () => {
   };
 
   const handleSearchType = (e) => {
-    if (search == null) {
-      const firstWord = e.target.value;
-      setSearch(firstWord.toUpperCase());
+    const value = e.target.value;
+    if (search === null) {
+      setSearch(value.split(" ")[0].toUpperCase());
+    } else {
+      setSearch(value);
     }
-    setSearch(e.target.value);
   };
 
   const handleSearch = async () => {
@@ -64,6 +65,11 @@ const Store = () => {
           viewBox="0 0 24 24"
           stroke="currentColor"
           onClick={handleSearch}
+          onKeyDown={(e) => {
+            if (e.key === "Enter") {
+              handleSearch();
+            }
+          }}
         >
           <path
             strokeLinecap="round"
