@@ -10,6 +10,7 @@ import GoogleStrategy from "passport-google-oauth2";
 import dotenv from "dotenv";
 import { GoogleGenerativeAI } from "@google/generative-ai";
 import pkg from "pg";
+import bcrypt from "bcrypt";
 
 const { Pool } = pkg;
 const app = express();
@@ -122,6 +123,123 @@ app.get("/order/:id", async (req, res) => {
     console.error("Database error:", err);
     return res.status(500).json({ error: "Internal server error" });
   }
+});
+
+app.post("/register", async (req, res) => {
+  const name = req.body.name;
+  const email = req.body.email;
+  const password = req.body.password;
+
+  try {
+    const checkResult = await db.query(
+      "SELECT * FROM users WHERE email_id = $1",
+      [email]
+    );
+
+    if (checkResult.rows.length > 0) {
+      res.sendStatus(404);
+    } else {
+      bcrypt.hash(password, saltRounds, async (err, hash) => {
+        if (err) {
+          console.error("Error hashing password:", err);
+        } else {
+          const result = await db.query(
+            "INSERT INTO users (name, email_id, password) VALUES ($1, $2, $3) RETURNING *",
+            [name, email, hash]
+          );
+          const user = result.rows[0];
+          req.login(user, (err) => {
+            if (err) {
+              console.log(err);
+            } else {
+              console.log("success");
+              res.json({ name: user.name, userId: user.id });
+            }
+          });
+        }
+      });
+    }
+  } catch (err) {
+    console.log(err);
+  }
+});
+
+app.post("/login", (req, res, next) => {
+  passport.authenticate("local", (err, user) => {
+    if (err) {
+      return res
+        .status(500)
+        .json({ message: "Internal server error", error: err });
+    }
+    if (!user) {
+      return res.status(401).json({ message: "Invalid credentials" });
+    }
+    req.login(user, (err) => {
+      if (err) {
+        return res.status(500).json({ message: "Login failed", error: err });
+      }
+      console.log(user.id);
+      return res.json({
+        message: "Login successful",
+        name: user.name,
+        userId: user.id,
+      });
+    });
+  })(req, res, next);
+});
+
+app.post("/logout", (req, res) => {
+  req.logout((err) => {
+    if (err) {
+      return res.status(500).json({ message: "Logout failed", error: err });
+    }
+    req.session.destroy(() => {
+      res.clearCookie("connect.sid");
+      res.json({ message: "Logout successful" });
+    });
+  });
+});
+
+passport.use(
+  "local",
+  new Strategy({ usernameField: "email" }, async function verify(
+    email,
+    password,
+    cb
+  ) {
+    try {
+      const result = await db.query("SELECT * FROM users WHERE email_id = $1", [
+        email,
+      ]);
+      if (result.rows.length > 0) {
+        const user = result.rows[0];
+        const storedHashedPassword = user.password;
+        bcrypt.compare(password, storedHashedPassword, (err, result) => {
+          if (err) {
+            return cb(err);
+          } else {
+            if (result) {
+              return cb(null, user);
+            } else {
+              return cb(null, false);
+            }
+          }
+        });
+      } else {
+        return cb(null, false);
+      }
+    } catch (err) {
+      return cb(err);
+    }
+  })
+);
+
+passport.serializeUser((user, cb) => {
+  cb(null, user);
+});
+
+passport.deserializeUser((user, cb) => {
+  cb(null, user);
 });
 
 app.listen(port, (req, res) => {

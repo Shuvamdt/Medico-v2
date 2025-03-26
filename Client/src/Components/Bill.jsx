@@ -43,25 +43,3 @@ const Bill = ({ medicines }) => {
 };
 
 export default Bill;
-{
-  /* <div className="flex flex-col justify-between">
-      <div className="flex justify-center items-center px-10 py-10">
-        {medicines.length > 0 ? (
-          <div>
-            <div className="flex flex-col p-2 m-2 w-full">
-              
-            </div>
-            <li className="grid grid-cols-5 border-t py-4">
-              <h1 className="col-span-2 col-start-2 text-2xl">Total Price:</h1>
-              <p className="text-xl">₹{totalPrice.toFixed(2)}</p>
-            </li>
-          </div>
-        ) : (
-          <div className="flex flex-col w-full h-full justify-center items-center">
-            <img src={empty} alt="empty-box" className="h-48 w-48 m-5" />
-            <p className="text-center text-lg">Your bag is empty</p>
-          </div>
-        )}
-      </div>
-    </div> */
-}

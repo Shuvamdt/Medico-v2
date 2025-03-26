@@ -7,14 +7,14 @@ import axios from "axios";
 
 mirage.register();
 
-//const API_URL = "http://localhost:4000";
-const API_URL = "https://medico-v2-idl5.vercel.app";
+const API_URL = "http://localhost:4000";
+//const API_URL = "https://medico-v2-idl5.vercel.app";
 
-const Orders = () => {
+const Orders = (props) => {
   const [medicines, setMedicines] = useState([]);
   const [loading, setLoading] = useState(true);
   const [totalPrice, setTotalPrice] = useState(0);
-  const userId = 1;
+  const userId = localStorage.getItem("userId");
 
   useEffect(() => {
     const fetchMedicines = () => {
@@ -47,6 +47,7 @@ const Orders = () => {
       0
     );
     setTotalPrice(total.toFixed(2));
+    window.location.reload();
   };
 
   const handleOrder = async () => {
@@ -67,6 +68,7 @@ const Orders = () => {
       }
 
       alert("Order sent successfully");
+      window.location.reload();
       localStorage.removeItem("orders");
       setMedicines([]);
       setTotalPrice("0.00");

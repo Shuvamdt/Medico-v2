@@ -1,13 +1,10 @@
 import React, { useState, useEffect } from "react";
-import { useNavigate } from "react-router-dom";
 
 const Medicine = (props) => {
   const [orders, setOrders] = useState(() => {
     const storedOrders = localStorage.getItem("orders");
     return storedOrders ? JSON.parse(storedOrders) : [];
   });
-
-  const navigate = useNavigate();
 
   useEffect(() => {
     localStorage.setItem("orders", JSON.stringify(orders));
@@ -22,7 +19,7 @@ const Medicine = (props) => {
     setOrders((prevOrders) => [...prevOrders, newOrder]);
 
     alert("Medicine added to the bag!");
-    navigate("/orders");
+    window.location.reload();
   };
 
   return (

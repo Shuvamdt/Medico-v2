@@ -13,13 +13,16 @@ import { motion } from "framer-motion";
 
 const App = () => {
   const [orders, setOrders] = useState([]);
+  const [userId, setUserId] = useState(localStorage.getItem("userId"));
+  const [logStatus, setLogStatus] = useState(localStorage.getItem("logStatus"));
 
   useEffect(() => {
+    console.log(userId, logStatus);
     const storedOrders = localStorage.getItem("orders");
     if (storedOrders) {
       setOrders(JSON.parse(storedOrders));
     }
-  }, []);
+  }, [userId, logStatus]);
 
   const handleOrdersUpdate = (newOrder) => {
     setOrders((prevOrders) => {
@@ -33,7 +36,11 @@ const App = () => {
     <BrowserRouter>
       <div className="flex flex-col min-h-screen">
         <Background />
-        <Navbar />
+        <Navbar
+          logStatus={logStatus}
+          setLogStatus={setLogStatus}
+          setUserId={setUserId}
+        />
         <motion.div
           className="w-full flex flex-col c-space gap-3 relative z-10"
           initial={{ opacity: 0, y: 50 }}
@@ -48,9 +55,27 @@ const App = () => {
               path="/store"
               element={<Store handleOrdersUpdate={handleOrdersUpdate} />}
             />
-            <Route path="/orders" element={<Orders orders={orders} />} />
-            <Route path="/register" element={<Register />} />
-            <Route path="/my-orders" element={<MyOrders />} />
+            <Route
+              path="/orders"
+              element={
+                <Orders orders={orders} logStatus={logStatus} userId={userId} />
+              }
+            />
+            <Route
+              path="/register"
+              element={
+                <Register
+                  logStatus={logStatus}
+                  userId={userId}
+                  setLogStatus={setLogStatus}
+                  setUserId={setUserId}
+                />
+              }
+            />
+            <Route
+              path="/my-orders"
+              element={<MyOrders logStatus={logStatus} userId={userId} />}
+            />
           </Routes>
         </motion.div>
         <Footer />

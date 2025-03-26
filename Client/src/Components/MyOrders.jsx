@@ -3,15 +3,15 @@ import Bill from "./Bill";
 import axios from "axios";
 import { mirage } from "ldrs";
 
-//const API_URL = "http://localhost:4000";
-const API_URL = "https://medico-v2-idl5.vercel.app";
+const API_URL = "http://localhost:4000";
+//const API_URL = "https://medico-v2-idl5.vercel.app";
 mirage.register();
 
 const MyOrders = () => {
   const [medicines, setMedicines] = useState([]);
   const [loading, setLoading] = useState(true);
   const [totalPrice, setTotalPrice] = useState(0);
-  const userId = 1;
+  const userId = localStorage.getItem("userId");
 
   useEffect(() => {
     const fetchMedicines = async () => {

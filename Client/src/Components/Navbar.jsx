@@ -1,20 +1,39 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Logo from "../assets/Logo.png";
 import menu from "/assets/menu-button.png";
 import close from "/assets/close.png";
 import user from "/assets/user.png";
 import bag from "/assets/shopping-bag.png";
 import { Link } from "react-router-dom";
+import axios from "axios";
+
+const API_URL = "http://localhost:4000";
+//const API_URL = "https://medico-v2-idl5.vercel.app";
 
 const Navbar = (props) => {
   const bagItems = localStorage.getItem("orders");
   const orders = bagItems ? JSON.parse(bagItems) : [];
-  const totalItems = orders.length;
+  const [totalItems, setTotalItems] = useState(orders.length);
 
   const [mobileMenuOpen, setMobileMenu] = useState(false);
   const toggleMobileMenu = () => setMobileMenu(!mobileMenuOpen);
   const [avatarMenuOpen, setAvatarMenuOpen] = useState(false);
   const toggleAvatarMenu = () => setAvatarMenuOpen(!avatarMenuOpen);
+  const handleLogout = async () => {
+    try {
+      await axios.post(`${API_URL}/logout`, {}, { withCredentials: true });
+      localStorage.removeItem("userId");
+      localStorage.removeItem("logStatus");
+      props.setLogStatus(false);
+      props.setUserId(0);
+    } catch (error) {
+      console.error(error);
+    }
+  };
+  useEffect(() => {
+    setTotalItems(orders.length);
+  }, [orders.length, props]);
+
   return (
     <nav className="sticky z-50 top-0 py-3 backdrop-blur-sm">
       <div className="container px-4 mx-auto relative text-lg">
@@ -55,14 +74,20 @@ const Navbar = (props) => {
             {avatarMenuOpen && (
               <div className="absolute top-10 right-0 h-fit w-fit p-5 rounded-lg backdrop-blur-lg bg-[#93B1A6]">
                 <div className="flex flex-col flex-grow justify-center items-center p-2">
-                  {!props.signedIN ? (
+                  {!props.logStatus ? (
                     <div className="flex flex-col mx-auto right-0 top-0 z-20 space-x-12 gap-4">
-                      <button className="rounded-full text-center bg-[#183D3D] mx-4 px-4 py-1 hover:bg-[#040D12]">
+                      <button
+                        className="rounded-full text-center bg-[#183D3D] mx-4 px-4 py-1 hover:bg-[#040D12]"
+                        onClick={toggleAvatarMenu}
+                      >
                         <Link to="/register" state={{ user: true }}>
                           Sign In
                         </Link>
                       </button>
-                      <button className="rounded-full text-center bg-[#183D3D] mx-4 px-4 py-1 hover:bg-[#040D12]">
+                      <button
+                        className="rounded-full text-center bg-[#183D3D] mx-4 px-4 py-1 hover:bg-[#040D12]"
+                        onClick={toggleAvatarMenu}
+                      >
                         <Link to="/register" state={{ user: false }}>
                           Sign Up
                         </Link>
@@ -70,13 +95,25 @@ const Navbar = (props) => {
                     </div>
                   ) : (
                     <div className="flex flex-col mx-auto right-0 top-0 z-20 space-x-12 gap-4">
-                      <button className="rounded-full text-center bg-[#183D3D] mx-4 px-4 py-1">
+                      <button
+                        className="rounded-full text-center bg-[#183D3D] mx-4 px-4 py-1"
+                        onClick={toggleAvatarMenu}
+                      >
                         My Account
                       </button>
-                      <button className="rounded-full text-center bg-[#183D3D] mx-4 px-4 py-1">
+                      <button
+                        className="rounded-full text-center bg-[#183D3D] mx-4 px-4 py-1"
+                        onClick={toggleAvatarMenu}
+                      >
                         <a href="/my-orders">My Orders</a>
                       </button>
-                      <button className="rounded-full text-center bg-[#183D3D] mx-4 px-4 py-1">
+                      <button
+                        className="rounded-full text-center bg-[#183D3D] mx-4 px-4 py-1"
+                        onClick={() => {
+                          toggleAvatarMenu();
+                          handleLogout();
+                        }}
+                      >
                         Sign Out
                       </button>
                     </div>
@@ -99,13 +136,19 @@ const Navbar = (props) => {
               <div className="flex flex-col flex-grow justify-center items-center p-2">
                 <ul className="flex flex-col items-center mx-auto gap-3">
                   <li>
-                    <a href="/">Home</a>
+                    <a href="/" onClick={toggleMobileMenu}>
+                      Home
+                    </a>
                   </li>
                   <li>
-                    <a href="/store">Store</a>
+                    <a href="/store" onClick={toggleMobileMenu}>
+                      Store
+                    </a>
                   </li>
                   <li>
-                    <a href="/about">About</a>
+                    <a href="/about" onClick={toggleMobileMenu}>
+                      About
+                    </a>
                   </li>
                 </ul>
               </div>
