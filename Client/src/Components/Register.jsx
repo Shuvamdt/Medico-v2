@@ -62,6 +62,8 @@ const Register = (props) => {
       });
       props.setUserId(response.data.userId);
       props.setLogStatus(true);
+      localStorage.setItem("userId", response.data.userId);
+      localStorage.setItem("logStatus", true);
       alert("Registration successful");
       window.location.href = "/";
     } catch (err) {
