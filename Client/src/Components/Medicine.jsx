@@ -24,7 +24,7 @@ const Medicine = (props) => {
 
   return (
     <div className="card shadow-md rounded-3xl anim-block bg-[#040D12] border flex flex-col h-full">
-      <div className="flex card-heading text-lg font-bold px-2 rounded-t-2xl bg-[#183D3D] break-words overflow-hidden">
+      <div className="flex card-heading text-lg font-bold px-2 rounded-t-3xl bg-[#183D3D] break-words overflow-hidden">
         <h2 className="p-2">{props.name}</h2>
       </div>
       <div className="p-2 flex-grow overflow-hidden break-words">
