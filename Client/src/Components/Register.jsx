@@ -140,7 +140,7 @@ const Register = (props) => {
                 onChange={handleLoginInput}
               />
               <button
-                className="px-5 py-1 mx-4 my-2 rounded-full bg-[#93B1A6]"
+                className="px-5 py-1 mx-4 my-2 rounded-full bg-[#183D3D]"
                 type="submit"
               >
                 Sign In
@@ -219,7 +219,7 @@ const Register = (props) => {
                 onChange={handleSignUpInput}
               />
               <button
-                className="px-5 py-1 mx-4 my-2 rounded-full bg-[#93B1A6]"
+                className="px-5 py-1 mx-4 my-2 rounded-full bg-[#183D3D]"
                 type="submit"
               >
                 Sign Up

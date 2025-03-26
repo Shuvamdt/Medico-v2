@@ -55,7 +55,7 @@ const Store = () => {
         <input
           type="text"
           placeholder="Search..."
-          className="w-full h-10 pl-4 pr-10 text-md bg-[#93B1A6] rounded-full"
+          className="w-full h-10 pl-4 pr-10 text-md bg-[#183D3D] rounded-full"
           onChange={handleSearchType}
         />
         <svg
