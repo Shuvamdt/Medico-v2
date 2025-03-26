@@ -10,7 +10,7 @@ import GoogleStrategy from "passport-google-oauth2";
 import dotenv from "dotenv";
 import { GoogleGenerativeAI } from "@google/generative-ai";
 import pkg from "pg";
-import bcrypt from "bcrypt";
+import bcryptjs from "bcryptjs";
 
 const { Pool } = pkg;
 const app = express();
@@ -139,7 +139,7 @@ app.post("/register", async (req, res) => {
     if (checkResult.rows.length > 0) {
       res.sendStatus(404);
     } else {
-      bcrypt.hash(password, saltRounds, async (err, hash) => {
+      bcryptjs.hash(password, saltRounds, async (err, hash) => {
         if (err) {
           console.error("Error hashing password:", err);
         } else {
@@ -214,7 +214,7 @@ passport.use(
       if (result.rows.length > 0) {
         const user = result.rows[0];
         const storedHashedPassword = user.password;
-        bcrypt.compare(password, storedHashedPassword, (err, result) => {
+        bcryptjs.compare(password, storedHashedPassword, (err, result) => {
           if (err) {
             return cb(err);
           } else {
