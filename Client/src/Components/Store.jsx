@@ -25,12 +25,15 @@ const Store = () => {
   };
 
   const handleSearchType = (e) => {
+    if (search == null) {
+      const firstWord = e.target.value;
+      setSearch(firstWord.toUpperCase());
+    }
     setSearch(e.target.value);
   };
 
   const handleSearch = async () => {
     try {
-      console.log(search);
       const response = await axios.get(`${API_URL}/search?query=${search}`, {
         withCredentials: true,
       });
