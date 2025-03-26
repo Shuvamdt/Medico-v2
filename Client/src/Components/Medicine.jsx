@@ -38,7 +38,7 @@ const Medicine = (props) => {
       </div>
       <div className="mt-auto p-2 flex justify-end mx-4 my-2">
         <button
-          className="px-4 py-1 rounded-full bg-[#93B1A6]"
+          className="px-4 py-1 rounded-full bg-[#93B1A6] text-[#040D12]"
           onClick={handleClick}
         >
           Buy
