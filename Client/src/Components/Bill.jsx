@@ -35,7 +35,6 @@ const Bill = ({ medicines }) => {
       ) : (
         <div className="flex flex-col w-full h-full justify-center items-center">
           <img src={empty} alt="empty-box" className="h-48 w-48 m-5" />
-          <p className="text-center text-lg">Your bag is empty</p>
         </div>
       )}
     </div>

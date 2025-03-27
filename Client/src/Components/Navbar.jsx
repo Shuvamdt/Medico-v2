@@ -26,6 +26,7 @@ const Navbar = (props) => {
       localStorage.removeItem("logStatus");
       props.setLogStatus(false);
       props.setUserId(0);
+      window.location.href = "/";
     } catch (error) {
       console.error(error);
     }

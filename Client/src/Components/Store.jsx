@@ -26,11 +26,10 @@ const Store = () => {
 
   const handleSearchType = (e) => {
     const value = e.target.value;
-    if (search === null) {
-      setSearch(value.split(" ")[0].toUpperCase());
-    } else {
-      setSearch(value);
-    }
+    const letters = value.split();
+    const firstLetter = letters[0];
+    letters[0] = firstLetter.toUpperCase();
+    setSearch(letters.join(""));
   };
 
   const handleSearch = async () => {
@@ -57,6 +56,11 @@ const Store = () => {
           placeholder="Search..."
           className="w-full h-10 pl-4 pr-10 text-md bg-[#183D3D] rounded-full"
           onChange={handleSearchType}
+          onKeyDown={(e) => {
+            if (e.key === "Enter") {
+              handleSearch();
+            }
+          }}
         />
         <svg
           className="absolute right-3 top-1/2 transform -translate-y-1/2 w-5 h-5"
@@ -65,11 +69,6 @@ const Store = () => {
           viewBox="0 0 24 24"
           stroke="currentColor"
           onClick={handleSearch}
-          onKeyDown={(e) => {
-            if (e.key === "Enter") {
-              handleSearch();
-            }
-          }}
         >
           <path
             strokeLinecap="round"
