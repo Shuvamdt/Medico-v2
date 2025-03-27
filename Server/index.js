@@ -77,7 +77,7 @@ app.get("/search", async (req, res) => {
   try {
     const { query } = req.query;
     const result = await db.query(
-      `SELECT * FROM medicines WHERE name LIKE '%${query}%' ORDER BY id ASC LIMIT 200`
+      `SELECT * FROM medicines WHERE name ILIKE '%${query}%' ORDER BY id ASC LIMIT 200`
     );
     res.json(result.rows);
   } catch (err) {

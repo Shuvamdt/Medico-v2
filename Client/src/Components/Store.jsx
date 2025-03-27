@@ -26,10 +26,7 @@ const Store = () => {
 
   const handleSearchType = (e) => {
     const value = e.target.value;
-    const letters = value.split();
-    const firstLetter = letters[0];
-    letters[0] = firstLetter.toUpperCase();
-    setSearch(letters.join(""));
+    setSearch(value);
   };
 
   const handleSearch = async () => {
