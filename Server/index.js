@@ -12,10 +12,10 @@ import { GoogleGenerativeAI } from "@google/generative-ai";
 import pkg from "pg";
 import bcryptjs from "bcryptjs";
 
-const backendURL = "http://localhost:4000";
-const frontEndURL = "http://localhost:5173";
-//const frontEndURL = "https://medico-v2.vercel.app";
-//const backendURL = "https://medico-v2.vercel.app/";
+//const backendURL = "http://localhost:4000";
+//const frontEndURL = "http://localhost:5173";
+const frontEndURL = "https://medico-v2.vercel.app";
+const backendURL = "https://medico-v2.vercel.app/";
 
 const { Pool } = pkg;
 const app = express();
