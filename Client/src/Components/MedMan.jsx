@@ -90,6 +90,11 @@ const MedMan = () => {
               className="border p-2 rounded-xl w-full"
               placeholder="Medicine name, ex: Paracetamol"
               autoFocus
+              onKeyDown={(e) => {
+                if (e.key === "Enter") {
+                  handleRequest();
+                }
+              }}
             />
             <button
               onClick={handleRequest}
