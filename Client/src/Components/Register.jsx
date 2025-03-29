@@ -3,8 +3,8 @@ import { useLocation } from "react-router-dom";
 import { motion } from "framer-motion";
 import axios from "axios";
 
-const API_URL = "http://localhost:4000";
-//const API_URL = "https://medico-v2-idl5.vercel.app";
+//const API_URL = "http://localhost:4000";
+const API_URL = "https://medico-v2-idl5.vercel.app";
 
 const Register = (props) => {
   const location = useLocation();
