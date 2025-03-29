@@ -67,14 +67,13 @@ const genAI = new GoogleGenerativeAI(process.env.GEMINI_API_KEY);
 const model = genAI.getGenerativeModel({ model: "gemini-1.5-flash" });
 
 app.post("/MedMan", async (req, res) => {
-  console.log(req.body.symptoms);
-  const { symptoms } = req.body;
+  const { medicine } = req.body;
 
-  if (!symptoms) {
-    return res.status(400).json({ error: "Symptoms are required" });
+  if (!medicine) {
+    return res.status(400).json({ error: "Medicine name is required" });
   }
 
-  const prompt = `Find the best medicines for these symptoms\n\n${blogContent}`;
+  const prompt = `Tell me the medicinal details of \n\n${medicine}`;
 
   try {
     const result = await model.generateContent(prompt);
