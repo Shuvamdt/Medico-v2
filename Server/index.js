@@ -67,8 +67,8 @@ const genAI = new GoogleGenerativeAI(process.env.GEMINI_API_KEY);
 const model = genAI.getGenerativeModel({ model: "gemini-1.5-flash" });
 
 app.post("/MedMan", async (req, res) => {
-  console.log(req.params.symptoms);
-  const { symptoms } = req.params.symptoms;
+  console.log(req.body.symptoms);
+  const { symptoms } = req.body;
 
   if (!symptoms) {
     return res.status(400).json({ error: "Symptoms are required" });
