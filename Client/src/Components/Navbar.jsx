@@ -96,12 +96,12 @@ const Navbar = (props) => {
                     </div>
                   ) : (
                     <div className="flex flex-col mx-auto right-0 top-0 z-20 space-x-12 gap-4">
-                      <button
+                      {/* <button
                         className="rounded-full text-center bg-[#183D3D] mx-4 px-4 py-1"
                         onClick={toggleAvatarMenu}
                       >
                         My Account
-                      </button>
+                      </button> */}
                       <button
                         className="rounded-full text-center bg-[#183D3D] mx-4 px-4 py-1"
                         onClick={toggleAvatarMenu}

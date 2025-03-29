@@ -95,6 +95,11 @@ const MedMan = () => {
               onClick={handleRequest}
               className="bg-[#183D3D] m-2 p-2 rounded-full h-10 w-10"
               disabled={loading}
+              onKeyDown={(e) => {
+                if (e.key === "Enter") {
+                  handleRequest();
+                }
+              }}
             >
               <img src={send} alt="Send" />
             </button>
