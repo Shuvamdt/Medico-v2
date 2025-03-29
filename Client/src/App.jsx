@@ -9,6 +9,7 @@ import About from "./Components/About";
 import Register from "./Components/Register";
 import MyOrders from "./Components/MyOrders";
 import Background from "./Components/Background";
+import AuthSuccess from "./Components/AuthSuccess";
 import { motion } from "framer-motion";
 
 const App = () => {
@@ -75,6 +76,15 @@ const App = () => {
             <Route
               path="/my-orders"
               element={<MyOrders logStatus={logStatus} userId={userId} />}
+            />
+            <Route
+              path="/auth/success"
+              element={
+                <AuthSuccess
+                  setUserId={setUserId}
+                  setLogStatus={setLogStatus}
+                />
+              }
             />
           </Routes>
         </motion.div>

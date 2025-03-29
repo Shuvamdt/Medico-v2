@@ -7,8 +7,8 @@ import axios from "axios";
 
 mirage.register();
 
-//const API_URL = "http://localhost:4000";
-const API_URL = "https://medico-v2-idl5.vercel.app";
+const API_URL = "http://localhost:4000";
+//const API_URL = "https://medico-v2-idl5.vercel.app";
 
 const Orders = (props) => {
   const [medicines, setMedicines] = useState([]);

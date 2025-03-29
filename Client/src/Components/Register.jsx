@@ -3,8 +3,8 @@ import { useLocation } from "react-router-dom";
 import { motion } from "framer-motion";
 import axios from "axios";
 
-//const API_URL = "http://localhost:4000";
-const API_URL = "https://medico-v2-idl5.vercel.app";
+const API_URL = "http://localhost:4000";
+//const API_URL = "https://medico-v2-idl5.vercel.app";
 
 const Register = (props) => {
   const location = useLocation();
@@ -70,6 +70,10 @@ const Register = (props) => {
       console.error("Sign Up failed:", err.response?.data || err.message);
       alert(err.response?.data?.error || "Server error");
     }
+  };
+
+  const handleGoogleLogin = async () => {
+    window.location.href = `${API_URL}/auth/google`;
   };
 
   const formVariants = {
@@ -150,6 +154,7 @@ const Register = (props) => {
             <button
               className="px-5 py-1 mx-4 my-2 rounded-full border"
               type="submit"
+              onClick={handleGoogleLogin}
             >
               Sign in with Google
             </button>
@@ -229,6 +234,7 @@ const Register = (props) => {
             <button
               className="px-5 py-1 mx-4 my-2 rounded-full border"
               type="submit"
+              onClick={handleGoogleLogin}
             >
               Sign Up with Google
             </button>

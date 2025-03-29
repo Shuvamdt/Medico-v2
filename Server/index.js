@@ -12,6 +12,11 @@ import { GoogleGenerativeAI } from "@google/generative-ai";
 import pkg from "pg";
 import bcryptjs from "bcryptjs";
 
+const backendURL = "http://localhost:4000";
+const frontEndURL = "http://localhost:5173";
+//const frontEndURL = "https://medico-v2.vercel.app";
+//const backendURL = "https://medico-v2.vercel.app/";
+
 const { Pool } = pkg;
 const app = express();
 const port = process.env.PORT || 4000;
@@ -125,6 +130,27 @@ app.get("/order/:id", async (req, res) => {
   }
 });
 
+app.get(
+  "/auth/google",
+  passport.authenticate("google", { scope: ["profile", "email"] })
+);
+
+app.get(
+  "/auth/google/callback",
+  passport.authenticate("google", {
+    failureRedirect: `${frontEndURL}/auth/google`,
+    session: false,
+  }),
+  (req, res) => {
+    if (!req.user) {
+      return res.redirect("/login?error=Unauthorized");
+    }
+    res.redirect(
+      `${frontEndURL}/auth/success?userId=${req.user.id}&name=${req.user.name}`
+    );
+  }
+);
+
 app.post("/register", async (req, res) => {
   const name = req.body.name;
   const email = req.body.email;
@@ -232,6 +258,39 @@ passport.use(
       return cb(err);
     }
   })
+);
+
+passport.use(
+  new GoogleStrategy(
+    {
+      clientID: process.env.GOOGLE_CLIENT_ID,
+      clientSecret: process.env.GOOGLE_CLIENT_SECRET,
+      callbackURL: `${backendURL}/auth/google/callback`,
+      passReqToCallback: true,
+    },
+    async (request, accessToken, refreshToken, profile, cb) => {
+      try {
+        const email = profile.emails[0].value;
+        const result = await db.query(
+          "SELECT * FROM users WHERE email_id = $1",
+          [email]
+        );
+
+        if (result.rows.length === 0) {
+          // Insert new user
+          const newUser = await db.query(
+            "INSERT INTO users (name, email_id, password) VALUES ($1, $2, $3) RETURNING *",
+            [profile.displayName, email, "google"]
+          );
+          return cb(null, newUser.rows[0]);
+        } else {
+          return cb(null, result.rows[0]);
+        }
+      } catch (err) {
+        return cb(err);
+      }
+    }
+  )
 );
 
 passport.serializeUser((user, cb) => {
