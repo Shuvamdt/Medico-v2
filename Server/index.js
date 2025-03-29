@@ -66,14 +66,14 @@ const db = new Pool({
 const genAI = new GoogleGenerativeAI(process.env.GEMINI_API_KEY);
 const model = genAI.getGenerativeModel({ model: "gemini-1.5-flash" });
 
-app.post("/MedMan", async (req, res) => {
-  const { medicine } = req.body;
-
-  if (!medicine) {
-    return res.status(400).json({ error: "Medicine name is required" });
+app.post("/med-man", async (req, res) => {
+  const message = req.body;
+  const promptMessage = message.userMessage;
+  if (!promptMessage) {
+    return res.status(400).json({ error: "Invalid input message" });
   }
 
-  const prompt = `Tell me the medicinal details of \n\n${medicine}`;
+  const prompt = `${promptMessage}`;
 
   try {
     const result = await model.generateContent(prompt);

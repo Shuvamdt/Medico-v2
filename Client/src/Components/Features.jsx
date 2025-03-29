@@ -17,7 +17,9 @@ const Features = () => {
           </div>
           <hr />
           <p className="p-2 text-center text-sm">
-            Select from a wide range of medicines and accessories.
+            Select from a wide range of medicines and accessories.You can check
+            the compositions, type, manufacturer name, etc, in our medicine
+            store.
           </p>
         </div>
         <div className="w-60 h-60 p-2 m-2 border border-[#93B1A6] rounded-lg">
@@ -27,8 +29,8 @@ const Features = () => {
           </div>
           <hr />
           <p className="p-2 text-center text-sm">
-            Tell your health issues and AI will find the perfect medicine for
-            your cure.
+            Chat with MedMan he is your health adviser, tell your health issues
+            and he will find the perfect tips for your cure.
           </p>
         </div>
         <div className="w-60 h-60 p-2 m-2 border-1 border-[#93B1A6] rounded-lg">
