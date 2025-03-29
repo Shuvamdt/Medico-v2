@@ -66,6 +66,26 @@ const db = new Pool({
 const genAI = new GoogleGenerativeAI(process.env.GEMINI_API_KEY);
 const model = genAI.getGenerativeModel({ model: "gemini-1.5-flash" });
 
+app.post("/MedMan", async (req, res) => {
+  const { symptoms } = req.body;
+
+  if (!symptoms) {
+    return res.status(400).json({ error: "Symptoms are required" });
+  }
+
+  const prompt = `Find the best medicines for these symptoms\n\n${blogContent}`;
+
+  try {
+    const result = await model.generateContent(prompt);
+    const response = await result.response;
+    const text = response.text();
+    res.json({ message: text });
+  } catch (error) {
+    console.error("Error roasting blog:", error);
+    res.status(500).json({ error: error.message || "An error occurred" });
+  }
+});
+
 app.get("/all", async (req, res) => {
   try {
     const result = await db.query(
