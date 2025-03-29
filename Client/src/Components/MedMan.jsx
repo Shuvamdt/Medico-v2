@@ -53,7 +53,7 @@ const MedMan = () => {
       </button>
 
       {messageOpen && (
-        <div className="fixed z-50 bottom-5 right-5 bg-[#040D12] rounded-xl border flex flex-col h-100 w-50 sm:w-100 justify-end shadow-lg">
+        <div className="fixed z-50 bottom-5 right-5 bg-[#040D12] rounded-xl border flex flex-col h-100 w-70 sm:w-100 justify-end">
           <div className="flex justify-between items-center w-full p-4 border-b">
             <h2 className="text-xl">Medicine Info</h2>
             <button onClick={handleClick} className="rounded-full">
@@ -88,8 +88,9 @@ const MedMan = () => {
               value={userMessage}
               onChange={(e) => setUserMessage(e.target.value)}
               className="border p-2 rounded-xl w-full"
-              placeholder="Medicine name, ex: Paracetamol"
+              placeholder="Type something...."
               autoFocus
+              required
               onKeyDown={(e) => {
                 if (e.key === "Enter") {
                   handleRequest();
