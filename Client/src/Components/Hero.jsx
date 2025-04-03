@@ -36,7 +36,7 @@ const Hero = () => {
           </Suspense>
         </Canvas>
       </div>
-      <div className="w-full mx-auto flex flex-col sm:mt-50 mt-20 c-space gap-3 relative z-10">
+      <div className="w-full mx-auto flex flex-col sm:mt-70 mt-50 c-space gap-3 relative z-10">
         <p className="text-center text-gray_gradient">
           This is a medical store management system where you can buy and
           <br />
