@@ -1,3 +1,38 @@
+# Medico v2 — Medical E‑commerce & AI Health Advisor
+
+A modern medical store experience to discover and purchase medicines online. “We Care, We Cure.”
+
+- Live website: https://medico-v2.vercel.app/
+- Source repository: https://github.com/Shuvamdt/Medico-v2
+
+## Overview
+Medico v2 is a medical e‑commerce website where users can browse a wide range of medicines and health accessories, learn about each item’s composition and manufacturer, and get AI‑assisted guidance via a friendly health advisor.
+
+## Features
+- Vast Medicines Stock
+  - Explore an extensive catalogue of medicines and accessories
+  - View details like compositions, type, and manufacturer
+- AI‑Selected Medicines (MedMan)
+  - Chat with MedMan, your health adviser
+  - Describe your symptoms and receive tailored suggestions and tips
+- Ensuring Safe Medicine
+  - Focus on safety and effectiveness informed by testing and approvals
+
+## Feature Preview
+
+![Vast Medicines Stock](https://medico-v2.vercel.app/assets/medicine.png)
+
+Select from a wide range of medicines and accessories. Check compositions, types, and manufacturer details.
+
+---
+
+![AI Selected Medicines](https://medico-v2.vercel.app/assets/stethoscope.png)
+
+Chat with MedMan to get AI‑assisted tips and guidance for your health concerns.
+
+---
+
+![Ensuring Safe Medicine](https://medico-v2.vercel.app/assets/healthcare.png)
 
 Emphasis on safety and effectiveness through rigorous testing and approvals.
 
